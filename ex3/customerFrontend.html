@@ -1,0 +1,55 @@
+<html>
+  <body>
+    <link rel="stylesheet" href="style.css"></link>
+    <script src="formChecker.js"></script>
+    <h2>Choose your items, quantities(max 20) and shipment method, and enter your user name and password before checking out!</h2>
+    <form id="myForm" onsubmit="return validateForm()" action="customerBackend.php" method="post">
+      <label for="pen">Pen($3 per 1): </label><input type="number" id="qpen" name="qpen" min="0" max="20"><br>
+      <label for="pencil">Pencil($2 per 1): </label><input type="number" id="qpencil" name="qpencil" min="0" max="20"><br>
+      <label for="eraser">Eraser($1 per 1): </label><input type="number" id="qeraser" name="qeraser" min="0" max="20"><br>
+      <br>
+      <b>User name has to be in form of name@domain.com</b><br>
+      <label for="username">User name: </label><input type="text" id="username" name="username"><br>
+      <label for="password">Password: </label><input type="text" id="password" name="password"><br><br>
+      <b>Shipping method:</b><br>
+      <input type="radio" id="ship1" name="shipping" value="Free 7 day">
+      <label for="ship1">Free 7 day</label><br>
+      <input type="radio" id="ship2" name="shipping" value="$50.00 over night">
+      <label for="ship2">$50.00 over night</label><br>
+      <input type="radio" id="ship3" name="shipping" value="$5.00 three day">
+      <label for="ship3">$5.00 three day</label><br><br>
+      <input type="submit" value="Submit">
+    </form>
+    <button id="button">Reset</button>
+    <script>
+      function validateForm()
+      {
+        if(document.querySelector("#qpen").value == "" || document.querySelector("#qpencil").value == "" ||   document.querySelector("#qeraser").value == "")
+        {
+          alert("Cannot leave the item quantity blank!");
+          return false;
+        }else if(document.querySelector("#qpen").value<0|| document.querySelector("#qpencil").value<0||   document.querySelector("#qeraser").value<0)
+        {
+          alert("Item quantity cannot be negative!");
+          return false;
+        }else if(!ValidateEmail(document.querySelector("#username").value))
+        {
+          alert("User name not in correct format!");
+          return false;
+        }else if(document.querySelector("#password").value == "")
+        {
+          alert("Password cannot be blank!");
+          return false;
+        }else if(document.getElementById("ship1").checked==false && document.getElementById("ship2").checked==false && document.getElementById("ship3").checked==false)
+        {
+          alert("Must select a shipping method!");
+          return false;
+        }else
+        {
+          return true;
+          alert("here");
+        }
+      }
+    </script>
+  </body>
+</html>
